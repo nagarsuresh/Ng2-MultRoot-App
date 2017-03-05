@@ -1,10 +1,33 @@
+import { App2Module } from './app/app2/app2.module';
+import { App1Module } from './app/app1/app1.module';
+import { MainModule } from './app/main/main.module';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { enableProdMode } from '@angular/core';
+import { enableProdMode, NgModuleRef, NgZone } from '@angular/core';
 import { environment } from './environments/environment';
-import { AppModule } from './app/app.module';
+
+declare var globalObservable;
 
 if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule);
+const platform = platformBrowserDynamic();
+platform.bootstrapModule(MainModule);
+//   .then((module: NgModuleRef<any>) => {
+// });
+
+if (globalObservable) {
+  globalObservable.subscribe((id) => {
+    switch (id) {
+      case 'left':
+        platform['bootstrapModule'](App1Module); break;
+      case 'right':
+        platform['bootstrapModule'](App2Module);
+    }
+  });
+}  
+
+
+
+
+
