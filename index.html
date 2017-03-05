@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>MultiAppModules</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <script data-require="rxjs@*" data-semver="5.1.1" src="https://unpkg.com/rxjs@5.1.1/bundles/Rx.min.js"></script>
+
+  <script>
+    var globalObservable = new Rx.Subject();
+
+    function onBodyLoad() {
+      Rx.Observable.fromEvent(document.querySelectorAll('button'), 'click').map(event => event.target.id).subscribe(id => globalObservable.next(id))
+    }
+  </script>
+
+</head>
+
+<body onload="onBodyLoad()">
+
+  <app-main></app-main>
+
+  <div class="container">
+
+    <div class="jumbotron">
+      <div style="float: right">
+        <a href="https://snagar78.github.io" class="btn btn-primary">Home</a>
+        <a href="https://github.com/snagar78/interframe-communication" class="btn btn-primary">Source (Github Repository)</a>
+      </div>
+      <h1 class="display-6">Angular2 Multiple bootstrap modules</h1>
+      <div class="text-muted">Loading multiple angular2 modules in different divs outside the main module on demand.  <br>
+      Main module does not have a bootstrap component!!!</div>
+      <hr class="my-4">
+
+    </div>
+
+
+    <div class="row">
+      <div class="col-sm-6">
+        <app1-root>
+          <button class="btn btn-primary" id="left">Load Module 1</button>
+        </app1-root>
+      </div>
+      <div class="col-sm-6">
+        <app2-root>
+          <button class="btn btn-primary" id="right">Load Module 2</button>
+        </app2-root>
+      </div>
+    </div>
+  </div>
+
+
+  <!--<button id="refresh">Refresh!!!</button>-->
+<script type="text/javascript" src="inline.bundle.js"></script><script type="text/javascript" src="polyfills.bundle.js"></script><script type="text/javascript" src="styles.bundle.js"></script><script type="text/javascript" src="vendor.bundle.js"></script><script type="text/javascript" src="main.bundle.js"></script></body>
+
+</html>
