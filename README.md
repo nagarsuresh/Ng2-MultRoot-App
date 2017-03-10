@@ -7,3 +7,8 @@ This project is to try different root modules in the application and loading the
 ## Development server
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
+
+
+## Demo
+https://snagar78.github.io/Ng2-MultRoot-App/ 
+
